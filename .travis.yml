@@ -1,12 +1,12 @@
-language : node_js
+language: node_js
 node_js:
-  - 4.0
+- 4.0
 script:
-  - echo "Deploying"
+- echo "Deploying"
 install:
-  - npm install -g firebase-tools
+- npm install -g firebase-tools
 after_success:
-  - firebase deploy --token $FIREBASE_TOKEN
+- firebase deploy --token $FIREBASE_TOKEN
 notifications:
-  slack: amdevgroup:pw1YTUeFXRsnNdDOVCrTmUQF
-  
+  slack:
+    secure: q+fb9BCExIUIn0yjyR4vsIdDZFkV6x8KixcZtcFICiN9GlemuHrHBsvKwcqcwuoc6e43x16DH0Q9HUMG7//f0p54RUwS+E4lGR+YkmyOlTCew4p0kaS9runwcV1gWSqHVi29mMpResZQne7J1KKnVTTHETQcd8Z6+6bLDhXvA4H34wOAaQ3ILHspl7WgtIIyIEhcoDU93cubu1oGKxV6+CA3onEtG6tyHC0Ti4RTdbcApIBVLD5GA/oOoLuZvmVvsmVWaPqUhiHp/LnxBaJ0rc8SJwbVs7Q1AsB1K8weeTaYCTldktsyfsxyeY84ZsO3XaONJ6vUDi8eRJqH7AvQl0/ud/TQq3Jx63j2nADZESHpJgyF3DNclIDa6iR0SVJvOsr+yzUu0q6r1JqBcfbbC9URKmwRpOBtiXqjZWXIQCbocLG6DB0FPtLLGzNwmYfAvGBzqRGhERAMLX8t1Go1UCdbM++R3zUzeB+o07wVEu2uGn1llrAxJ3lmCxx5ju6k8PJyidbiCTsXlfblI4T7ByVbLz+98WNomuSTbgPdcYr6PWizBHjzwgwFSEIzmI9IJvbvBodQRpYbAK5lF/e7BYQH/BNcJD+yyUlcyYzH6lN3gt3uVT2kW0ptVsU/MPQNXphvf+k/PzDsvMgRaedYfg5Kq3N4NuXOPW9JHC6nEac=
