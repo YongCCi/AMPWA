@@ -1,7 +1,7 @@
 ﻿var cacheName = 'v1';   // 캐쉬명
 // 캐쉬지정 파일목록
 var urlsToCache = [
-    '/public/index.html'
+    '/index.html'
     , '/css/site.css'
     , '/images/girl.jpg'
     , '/js/jquery.min.js'
