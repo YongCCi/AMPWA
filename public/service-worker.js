@@ -2,6 +2,7 @@
 // 캐쉬지정 파일목록
 var urlsToCache = [
     '/'
+    , '__/firebase/'
     , '/css/site.css'
     , '/images/girl.jpg'
     , '/js/jquery.min.js'
