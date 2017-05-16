@@ -1,0 +1,1 @@
+var PushHandler = require('./components/push-handler.js');
