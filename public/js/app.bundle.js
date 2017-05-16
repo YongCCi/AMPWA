@@ -9516,17 +9516,20 @@ module.exports = 'app.js';
 
 var React = __webpack_require__(184);
 var ReactDom = __webpack_require__(100);
-/*
+
 var Main = React.createClass({
-    render: function () {
-        return (
-            <div>Hello World</div>
-        )
+    displayName: 'Main',
+
+    render: function render() {
+        return React.createElement(
+            'div',
+            null,
+            'Hello World'
+        );
     }
 });
 
-ReactDom.render(<Main />, document.getElementById("app"));
-*/
+ReactDom.render(React.createElement(Main, null), document.getElementById('app'));
 
 //let a;
 

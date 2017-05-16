@@ -2,7 +2,7 @@ module.exports ='app.js';
 
 var React = require('react');
 var ReactDom = require('react-dom');
-/*
+
 var Main = React.createClass({
     render: function () {
         return (
@@ -11,8 +11,8 @@ var Main = React.createClass({
     }
 });
 
-ReactDom.render(<Main />, document.getElementById("app"));
-*/
+ReactDom.render(<Main />, document.getElementById('app'));
+
 
 //let a;
 

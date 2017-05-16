@@ -7,36 +7,21 @@ module.exports = {
     module:{
         rules: [
             {
-                test: /\.js$/,
+                test: /\.jsx?$/,
                 exclude: [/node_modules/],
                 use: [{
                     loader: 'babel-loader',
-                    options: { presets: ['env'] },
+                    options: { presets: ['env','react'] },
                 }],
             },
             {
                 test:/\.jsx?$/,
                 exclude:/node_modules/,
-                loader: 'jshint-loader'
+                use:[{
+                    loader:'eslint-loader'
+                }]
             }
-        ],        
-        /*
-        loaders:[
-            {
-                test:/\.jsx?$/,
-                exclude:/(node_modules)/,
-                loader: 'babel-loader',
-                options:{
-                    presets:['es2015']
-                }
-            },
-            {
-                test:/\.jsx?$/,
-                exclude:/(node_modules)/,
-                loader: 'jshint-loader'
-            }
-        ]
-        */
+        ]   
     },
     output: {
         path: __dirname + '/public/js',
