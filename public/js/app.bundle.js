@@ -24382,7 +24382,7 @@ var _main2 = _interopRequireDefault(_main);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Main = function Main() {
+var App = function App() {
   return _react2.default.createElement(
     _styles.MuiThemeProvider,
     null,
@@ -24390,7 +24390,7 @@ var Main = function Main() {
   );
 };
 
-_reactDom2.default.render(_react2.default.createElement(Main, null), document.getElementById('app'));
+_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('app'));
 
 /***/ }),
 /* 237 */,

@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import {MuiThemeProvider} from 'material-ui/styles';
 import MyAwesomeReactComponent from './components/main.js';
 
-const Main = () => (
+const App = () => (
   <MuiThemeProvider>
     <MyAwesomeReactComponent />
   </MuiThemeProvider>
 );
 
 ReactDOM.render(
-  <Main />,
+  <App />,
   document.getElementById('app')
 );
