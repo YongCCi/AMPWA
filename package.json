@@ -1,0 +1,30 @@
+{
+  "name": "am-pwa",
+  "version": "1.0.0",
+  "description": "PWA Study",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YongCCi/AMPWA.git"
+  },
+  "keywords": [
+    "pwa"
+  ],
+  "author": "YongCCi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YongCCi/AMPWA/issues"
+  },
+  "homepage": "https://github.com/YongCCi/AMPWA#readme",
+  "dependencies": {
+    "caniuse-api": "^1.5.2",
+    "inline-style-prefixer": "^3.0.3",
+    "material-ui": "^0.18.1",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-tap-event-plugin": "^2.0.1"
+  }
+}
