@@ -1,13 +1,13 @@
 {
-    "name": "Simple Web App Demo",
-    "short_name": "Demo",
+    "name": "Albamon Web App Demo",
+    "short_name": "Albamon PWA",
     "icons": [
         {
-            "src": "launcher-icon-2x.png",
+            "src": "albamon-logo-96x96.jpg",
             "sizes": "96x96"
         }, {
-            "src": "launcher-icon-4x.png",
-            "sizes": "192x192"
+            "src": "albamon-logo-140x140.jpg",
+            "sizes": "140x140"
         }
     ],
     "theme_color": "#3F51B5",
