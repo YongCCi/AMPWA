@@ -16,4 +16,4 @@ ReactDom.render(<Main />, document.getElementById('app'));
 
 //let a;
 
-const a = [...Set(1, 1, 2, 'a', 'a')];
+const a = [...new Set(1, 1, 2, 'a', 'a')];
