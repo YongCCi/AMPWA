@@ -63,27 +63,16 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 83);
+/******/ 	return __webpack_require__(__webpack_require__.s = 237);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 81:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*push test*/
-
-
-/***/ }),
-
-/***/ 83:
+/***/ 237:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-
-var PushHandler = __webpack_require__(81);
 
 /***/ })
 

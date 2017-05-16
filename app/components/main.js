@@ -1,19 +1,8 @@
-module.exports ='app.js';
+import React from 'react';
+import {RaisedButton} from 'material-ui';
 
-var React = require('react');
-var ReactDom = require('react-dom');
+const MyAwesomeReactComponent = () => (
+  <RaisedButton label="Default" />
+);
 
-var Main = React.createClass({
-    render: function () {
-        return (
-            <div>Hello World</div>
-        )
-    }
-});
-
-ReactDom.render(<Main />, document.getElementById('app'));
-
-
-//let a;
-
-const a = [...new Set(1, 1, 2, 'a', 'a')];
+export default MyAwesomeReactComponent;

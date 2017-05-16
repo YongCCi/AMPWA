@@ -1,5 +1,15 @@
-var Main = require('./components/main.js');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {MuiThemeProvider} from 'material-ui/styles';
+import MyAwesomeReactComponent from './components/main.js';
 
-//console.log(Main);
+const Main = () => (
+  <MuiThemeProvider>
+    <MyAwesomeReactComponent />
+  </MuiThemeProvider>
+);
 
-console.log(Main.a);
+ReactDOM.render(
+  <Main />,
+  document.getElementById('app')
+);

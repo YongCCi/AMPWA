@@ -11,11 +11,12 @@ module.exports = {
                 exclude: [/node_modules/],
                 use: [{
                     loader: 'babel-loader',
-                    options: { presets: ['env','react'] },
+                    options: { presets: ['es2015','react'] },
                 }],
             },
             {
                 test:/\.jsx?$/,
+                enforce:"pre",
                 exclude:/node_modules/,
                 use:[{
                     loader:'eslint-loader'
