@@ -50,24 +50,26 @@
         });
 
         if ('serviceWorker' in navigator) {
-            //-----------------------------------------
-            // 서비스워커 등록(registration)
-            //-----------------------------------------
-            //navigator.serviceWorker.register('/service-worker.js?' + Math.round(new Date().getTime() / 1000), {
-            navigator.serviceWorker.register('/service-worker.js', {
-                scope: '/'
-            }).then(function (reg) {
-                console.log('서비스워커 registration 성공. Scope is ', reg.scope);
+            window.addEventListener('load', function() {
+                //-----------------------------------------
+                // 서비스워커 등록(registration)
+                //-----------------------------------------
+                //navigator.serviceWorker.register('/service-worker.js?' + Math.round(new Date().getTime() / 1000), {
+                navigator.serviceWorker.register('/service-worker.js', {
+                    scope: '/'
+                }).then(function (reg) {
+                    console.log('서비스워커 registration 성공. Scope is ', reg.scope);
 
-                if (reg.installing) {
-                    console.log('Service worker installing');
-                } else if (reg.waiting) {
-                    console.log('Service worker installed');
-                } else if (reg.active) {
-                    console.log('Service worker active');
-                }
-            }).catch(function (err) {
-                console.log('서비스워커 registration 실패.', err);
+                    if (reg.installing) {
+                        console.log('Service worker installing');
+                    } else if (reg.waiting) {
+                        console.log('Service worker installed');
+                    } else if (reg.active) {
+                        console.log('Service worker active');
+                    }
+                }).catch(function (err) {
+                    console.log('서비스워커 registration 실패.', err);
+                });
             });
         }
     </script>
