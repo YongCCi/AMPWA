@@ -3,14 +3,14 @@
     "short_name": "Albamon PWA",
     "icons": [
         {
-            "src": "albamon-logo-96x96.jpg",
+            "src": "albamon-icon-96x96.png",
             "sizes": "96x96"
         }, {
-            "src": "albamon-logo-140x140.jpg",
-            "sizes": "140x140"
+            "src": "albamon-icon-192x192.png",
+            "sizes": "192x192"
         }
     ],
-    "theme_color": "#3F51B5",
+    "theme_color": "#ff6600",
     "background_color": "#F5F5F5",
     "display": "standalone",
     "orientataion": "portrait",
