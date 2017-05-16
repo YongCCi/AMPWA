@@ -52,9 +52,9 @@ self.addEventListener('fetch', function (e) {
         caches.match(e.request)
         .then(function (response) {
             if (response) {
-                return response;
+                return response;        // from Cache
             }
-            return fetch(e.request);
+            return fetch(e.request);    // from Network
         })
     );
 });

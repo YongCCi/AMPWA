@@ -1,0 +1,18 @@
+{
+    "name": "Simple Web App Demo",
+    "short_name": "Demo",
+    "icons": [
+        {
+            "src": "launcher-icon-2x.png",
+            "sizes": "96x96"
+        }, {
+            "src": "launcher-icon-4x.png",
+            "sizes": "192x192"
+        }
+    ],
+    "theme_color": "#3F51B5",
+    "background_color": "#F5F5F5",
+    "display": "standalone",
+    "orientataion": "portrait",
+    "start_url": "/index.html?home=true"
+}
