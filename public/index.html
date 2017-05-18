@@ -1,41 +1,83 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>알바몬 PWA 앱</title>
-        <link rel="manifest" href="manifest.webmanifest">
-        <link href="/css/site.css" rel="stylesheet" />
-    </head>
-    <body>
-        <div id="app"></div>
-        <div>1. 서비스 워커 테스트 TEST</div>
-        <img src="/images/girl.jpg" alt="소녀" />
-        <script>
-            if ('serviceWorker' in navigator) {
-                window.addEventListener('load', function() {
-                    //-----------------------------------------
-                    // 서비스워커 등록(registration)
-                    //-----------------------------------------
-                    //navigator.serviceWorker.register('/service-worker.js?' + Math.round(new Date().getTime() / 1000), {
-                    navigator.serviceWorker.register('/service-worker.js', {
-                        scope: '/'
-                    }).then(function (reg) {
-                        console.log('서비스워커 registration 성공. Scope is ', reg.scope);
 
-                        if (reg.installing) {
-                            console.log('Service worker installing');
-                        } else if (reg.waiting) {
-                            console.log('Service worker installed');
-                        } else if (reg.active) {
-                            console.log('Service worker active');
-                        }
-                    }).catch(function (err) {
-                        console.log('서비스워커 registration 실패.', err);
-                    });
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>알바몬 PWA 앱</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link href="/css/site.css" rel="stylesheet" />
+</head>
+
+<body>
+    <h1>푸시테스트</h1>
+    <button disabled>Subscribe</button>
+    <div id="app"></div>
+    <div>1. 서비스 워커 테스트 TEST</div>
+    <img src="/images/girl.jpg" alt="소녀" />
+    <script>
+        var reg;
+        var sub;
+        var isSubscribed = false;
+        var subscribeButton = document.querySelector('button');
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                //-----------------------------------------
+                // 서비스워커 등록(registration)
+                //-----------------------------------------
+                //navigator.serviceWorker.register('/service-worker.js?' + Math.round(new Date().getTime() / 1000), {
+                navigator.serviceWorker.register('/service-worker.js', {
+                    scope: '/'
+                }).then(function (reg) {
+                    console.log('서비스워커 registration 성공. Scope is ', reg.scope);
+                    return navigator.serviceWorker.ready;
+                }).then(function (serviceWorkerRegistration) {
+                    reg = serviceWorkerRegistration;
+                    subscribeButton.disabled = false;
+
+                    if (reg.installing) {
+                        console.log('Service worker installing');
+                    } else if (reg.waiting) {
+                        console.log('Service worker installed');
+                    } else if (reg.active) {
+                        console.log('Service worker active');
+                    }
+
+                }).catch(function (err) {
+                    console.log('서비스워커 registration 실패.', err);
                 });
+            });
+        }
+
+        subscribeButton.addEventListener('click', function () {
+            if (isSubscribed) {
+                unsubscribe();
+            } else {
+                subscribe();
             }
-        </script>
-        <script src="js/app.bundle.js"></script>
-  </body>
+        });
+        function subscribe() {
+            reg.pushManager.subscribe({ userVisibleOnly: true }).
+                then(function (pushSubscription) {
+                    sub = pushSubscription;
+                    console.log('Subscribed! Endpoint:', sub.endpoint);
+                    subscribeButton.textContent = 'Unsubscribe';
+                    isSubscribed = true;
+                });
+        }
+        function unsubscribe() {
+            sub.unsubscribe().then(function (event) {
+                subscribeButton.textContent = 'Subscribe';
+                console.log('Unsubscribed!', event);
+                isSubscribed = false;
+            }).catch(function (error) {
+                console.log('Error unsubscribing', error);
+                subscribeButton.textContent = 'Subscribe';
+            });
+        }
+    </script>
+    <script src="js/app.bundle.js"></script>
+</body>
+
 </html>
