@@ -14,7 +14,10 @@
     <button disabled>Subscribe</button>
     <div id="app"></div>
     <div>1. 서비스 워커 테스트 TEST</div>
-    <img src="/images/girl.jpg" alt="소녀" />
+    <div id="info_device_token" style="border:1px solid blue; height:200px;width:100%;word-wrap:break-word">
+        here
+    </div>
+    <!--<img src="/images/girl.jpg" alt="소녀" />-->
     <script>
         var reg;
         var sub;
@@ -62,7 +65,8 @@
                 then(function (pushSubscription) {
                     sub = pushSubscription;
                     
-                    alert('Subscribed! Endpoint:' + sub.endpoint);
+                    //alert('Subscribed! Endpoint:' + sub.endpoint);
+                    document.getElementById('info_device_token').innerHTML  = sub.endpoint;
                     subscribeButton.textContent = 'Unsubscribe';
                     isSubscribed = true;
                 });
