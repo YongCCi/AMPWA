@@ -15,5 +15,8 @@
     "display": "standalone",
     "orientataion": "portrait",
     "start_url": "/index.html?home=true",
-    "gcm_sender_id": "412774017832"
+    "gcm_sender_id": "412774017832",
+    "permissions" :[
+        "gcm"
+    ]
 }

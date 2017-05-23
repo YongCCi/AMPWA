@@ -1,8 +1,7 @@
 module.exports = {
     context: __dirname + '/app',
     entry: {
-        app : './app.js',
-        push: './push.js'
+        index : './index.js'
     },
     module:{
         rules: [

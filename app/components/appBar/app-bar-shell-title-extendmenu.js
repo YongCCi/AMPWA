@@ -8,6 +8,7 @@ import FlatButton from 'material-ui/FlatButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import DrawerComponent from '../NavBar/NavBar-default.js';
 
+
 class Login extends Component {
   static muiName = 'FlatButton';
 
@@ -43,13 +44,13 @@ const styles = {
     }
 }
 
-class EnhancedDrawerComponent extends Component{
+class EnhancedDrawer extends Component{
     render(){
         return <DrawerComponent {...this.props}/>
     }
 }
 
-class AppBarComponent extends Component{
+class Header extends Component{
     state = {
         logged: true,
     };
@@ -60,7 +61,7 @@ class AppBarComponent extends Component{
 
     handleTouchTap = (event) => {
         event.preventDefault();
-        alert('a');
+        alert('pwa Test app');
     };
 
     handleTochLeftIconTap = (event) => {
@@ -73,17 +74,18 @@ class AppBarComponent extends Component{
             <div>
                 <MuiThemeProvider>
                     <AppBar
-                        title ="알바몬"
+                        title ="PWA"
                         titleStyle={styles.title}
                         onLeftIconButtonTouchTap ={this.handleTochLeftIconTap}
                         onTitleTouchTap={this.handleTouchTap}
                         iconElementRight={this.state.logged ? <Logged /> : <Login />}
                         />
                 </MuiThemeProvider>
-                <EnhancedDrawerComponent onRef={ref=>(this.child=ref)}/>                
+                <EnhancedDrawer onRef={ref=>(this.child=ref)}/> 
+            
             </div>
         );
     }
 }
 
-export default AppBarComponent;
+export default Header;

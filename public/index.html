@@ -10,26 +10,56 @@
 </head>
 
 <body>
-    <header class="header" id="header">
+    <!--<header class="header" id="header">
     </header>
 
     <nav class="nav" id="nav">
-    </nav>
+    </nav>-->
 
-    <main class="main" id="main">
+    <div id="root">
 
-    </main>
-
+    </div>
+<!--
     <div class="dialog-container">
 
-    </div>
+    </div>-->
 
-    <div class="loader">
-    <!-- Show a spinner or placeholders for content -->
-    </div>
+    <!--<div class="loader">
+    </div>-->
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        // TODO: Replace with your project's customized code snippet
+        var config = {
+            apiKey: "AIzaSyCwMqGdgBul99hfleKddOH1iDcypkj3FF0",
+            authDomain: "am-pwa.firebaseapp.com",
+            databaseURL: "https://am-pwa.firebaseio.com",
+            storageBucket: "am-pwa.appspot.com",
+            messagingSenderId: "183386889304",
+        };
+        firebase.initializeApp(config);
+    </script>
 
     <script>
-        var reg;
+        var swRegistration;
+        const appServerPushPublicKey = 'BE3LGAwv5l43NwS7YJHs5bXfXWnZtDKzvDMb-HP75yxg3vV1UxBciKg-pGVFUNsh5E6ERBiXIaJSpGhWJ8L9WMc';
+
+        function initialisePushSubscribedUI() {
+            // Set the initial subscription value
+            swRegistration.pushManager.getSubscription()
+            .then(function(subscription) {
+                isSubscribed = !(subscription === null);
+
+                if (isSubscribed) {
+                
+                } else {
+                    
+                }
+
+                updateBtn();
+            });
+        }
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function () {
@@ -43,24 +73,27 @@
                     console.log('서비스워커 registration 성공. Scope is ', reg.scope);
                     return navigator.serviceWorker.ready;
                 }).then(function (serviceWorkerRegistration) {
-                    reg = serviceWorkerRegistration;
+                    swRegistration = serviceWorkerRegistration;
                     subscribeButton.disabled = false;
+                    
 
-                    if (reg.installing) {
+                    if (swRegistration.installing) {
                         console.log('Service worker installing');
-                    } else if (reg.waiting) {
+                    } else if (swRegistration.waiting) {
                         console.log('Service worker installed');
-                    } else if (reg.active) {
+                    } else if (swRegistration.active) {
                         console.log('Service worker active');
                     }
-
+                    initialisePushSubscribedUI();
                 }).catch(function (err) {
                     console.log('서비스워커 registration 실패.', err);
                 });
             });
         }
     </script>
-    <script src="js/app.bundle.js"></script>
+    
+    <script src="js/index.bundle.js"></script>
+    
 </body>
 
 </html>
