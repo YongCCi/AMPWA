@@ -16,19 +16,18 @@ function waitUntilInstalled(registration) {
 
 if ('serviceWorker' in navigator) {
     //window.addEventListener('load', function () {
-    navigator.serviceWorker.register('./yongsw.js', {
-        scope: './'
+    navigator.serviceWorker.register('/yongsw.js', {
+        scope: '/'
     })
     .then(function (reg){
-        console.log('sw registration ok. Scope is ', reg.scope);
+        console.log('sw reg ok. Scope is ', reg.scope);
     })
     .catch(function(error) {
-        console.log("sw registration Faild", error);
+        console.log("sw reg Faild", error);
         document.querySelector('#status').textContent = error;
     });
     //}
 } else {
-  // The current browser doesn't support service workers.
     var aElement = document.createElement('a');
     aElement.href = 'http://www.chromium.org/blink/serviceworker/service-worker-faq';
     aElement.textContent = 'Service workers are not supported in the current browser.';

@@ -5,11 +5,12 @@ var CURRENT_CACHES = {
 
 self.addEventListener('install', function(event) {
     var urlsToPrefetch = [
-        './',
-        './object/sample.mp4',
+        '/'
+        ,'/images/img.jpg'
+        , '/object/sample.mp4'
     ];
-    console.log('Handling install event. Resources to prefetch:', urlsToPrefetch);
-    self.skipWaiting();
+    console.log('install event. Resources to prefetch:', urlsToPrefetch);
+    // self.skipWaiting();
     event.waitUntil(
         caches.open(CURRENT_CACHES.prefetch).then(function(cache) {
             return cache.addAll(urlsToPrefetch);
@@ -18,6 +19,7 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('activate', function(event) {
+    console.log('active event');
     var expectedCacheNames = Object.keys(CURRENT_CACHES).map(function(key) {
         return CURRENT_CACHES[key];
     });
@@ -27,7 +29,6 @@ self.addEventListener('activate', function(event) {
             return Promise.all(
                 cacheNames.map(function(cacheName) {
                     if (expectedCacheNames.indexOf(cacheName) === -1) {
-                        // If this cache name isn't present in the array of "expected" cache names, then delete it.
                         console.log('Deleting out of date cache:', cacheName);
                         return caches.delete(cacheName);
                     }
@@ -38,7 +39,7 @@ self.addEventListener('activate', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
-    console.log('Handling fetch event for', event.request.url);
+    console.log('fetch event for', event.request.url);
 
     if (event.request.headers.get('range')) {
         var pos =
@@ -90,3 +91,54 @@ self.addEventListener('fetch', function(event) {
 });
 
 
+// const latest = {
+//   cache: 'some-cache-name/v1'
+// };
+
+// self.addEventListener('install', event => {
+//     console.log("install");
+//   event.waitUntil(
+//     caches.open(latest.cache).then(cache => {
+//         console.log("install cache");
+//       return cache.addAll([
+//         '/'
+//       ]);
+//     })
+//   );
+// });
+
+// self.addEventListener('fetch', event => {
+//     console.log("fetch")
+//   // exclude requests that start with chrome-extension://
+//   if (event.request.url.startsWith('chrome-extension://')) return;
+//   event.respondWith(
+//     caches.open(latest.cache).then(cache => {
+//         console.log("open cache");
+//       return cache.match(event.request).then(response => {
+//         var fetchPromise = fetch(event.request).then(networkResponse => {
+//           cache.put(event.request, networkResponse.clone());
+//           return networkResponse;
+//         })
+//         return response || fetchPromise;
+//       })
+//     })
+//   );
+// });
+
+// self.addEventListener('activate', event => {
+//   event.waitUntil(
+//     caches.keys().then(cacheNames => {
+//       return Promise.all(
+//         cacheNames.filter(cacheName => {
+//           if (cacheName === latest.cache) {
+//             return false;
+//           }
+
+//           return true;
+//         }).map(cacheName => {
+//           return caches.delete(cacheName)
+//         })
+//       );
+//     })
+//   );
+// });
