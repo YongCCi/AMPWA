@@ -34,17 +34,17 @@
 //   });
 // });
 
-var isTooSoon = true;
-window.addEventListener("beforeinstallprompt", function(e) {
-    if (isTooSoon) {
-        e.preventDefault(); 
+// var isTooSoon = true;
+// window.addEventListener("beforeinstallprompt", function(e) {
+//     if (isTooSoon) {
+//         e.preventDefault(); 
 
-        setTimeout(function() {
-            isTooSoon = false;
-            e.prompt(); 
-        }, 10000);
-    }
-});
+//         setTimeout(function() {
+//             isTooSoon = false;
+//             e.prompt(); 
+//         }, 10000);
+//     }
+// });
 
     </script>
 
