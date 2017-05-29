@@ -13,7 +13,7 @@
     <h1>푸시테스트</h1>
     <button disabled>Subscribe</button>
     <div id="app"></div>
-    <div>1. 서비스 워커 테스트 TEST</div>
+    <div>1. 서비스 워커 테스트 TEST1</div>
     <div id="info_device_token" style="border:1px solid blue; height:200px;width:100%;word-wrap:break-word">
         here
     </div>
@@ -29,24 +29,27 @@
                 //-----------------------------------------
                 // 서비스워커 등록(registration)
                 //-----------------------------------------
-                //navigator.serviceWorker.register('/service-worker.js?' + Math.round(new Date().getTime() / 1000), {
-                navigator.serviceWorker.register('/service-worker.js', {
-                    scope: '/'
-                }).then(function (reg) {
-                    console.log('서비스워커 registration 성공. Scope is ', reg.scope);
-                    return navigator.serviceWorker.ready;
-                }).then(function (serviceWorkerRegistration) {
-                    reg = serviceWorkerRegistration;
-                    subscribeButton.disabled = false;
+                //navigator.serviceWorker.register('/service-worker.js?' + Math.round(new Date().getTime() / 1000), { scope: '/'}).then(function (reg) {
+                navigator.serviceWorker.register('/service-worker.js', { scope: '/'}).then(function (reg) {
+                    //console.log('서비스워커 registration 성공. Scope is ', reg.scope);
+                    //return navigator.serviceWorker.ready;
+                // }).then(function (serviceWorkerRegistration) {
+                //     reg = serviceWorkerRegistration;
+                //     subscribeButton.disabled = false;
+
+                    // 서비스 워커 파일 수동 업데이트 처리(10초마다)
+                    setInterval(function() {
+                        reg.update();
+                        console.log('서비스워커 업데이트 완료.');
+                    }, 10000);
 
                     if (reg.installing) {
                         console.log('Service worker installing');
                     } else if (reg.waiting) {
-                        console.log('Service worker installed');
+                        console.log('Service worker waiting(installed)');
                     } else if (reg.active) {
                         console.log('Service worker active');
                     }
-
                 }).catch(function (err) {
                     console.log('서비스워커 registration 실패.', err);
                 });
