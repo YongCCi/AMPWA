@@ -1,24 +1,101 @@
 
 
+<link rel="manifest" href="manifest.json">
 <div id="status"></div>
 
-<video controls  poster="static/poster.jpg"
+<video controls  
   style="margin: 0 0 1em 0; max-width: 100%; width: 480px;">
-  <!-- Videos are stored remotely with CORS enabled -->
-  <source src="./object/gbike.webm" type="video/webm" />
-  <source src="./object/gbike.mp4" type="video/mp4" />
+  <source src="./object/sample.mp4" type="video/mp4" />
   <p>Your browser does not support the video element.</p>
 </video>
 
 <div id="currentSrc"></div>
 
-<h3>Background</h3>
+<img src="/images/img.jpg" />
 
-<p>This sample demonstrates basic service worker registration, in conjunction with pre-fetching a video and its poster image.</p>
+<!--<script src="yongindex.js" ></script>-->
+<script>
+    
 
-<p>Visit <code>chrome://inspect/#service-workers</code> and click on the "inspect" link below the registered service worker to view logging statements for the various actions the <code><a href="service-worker.js">service-worker.js</a></code> script is performing. Since most of the action takes place during the service worker's install handler, and that is only executed the very first time you visit this page (unless the service worker script changes), it can be helpful to inspect the logging in a <a href="https://support.google.com/chrome/answer/95464">Chrome Incognito window</a>.</p>
+// window.addEventListener('beforeinstallprompt', function(e) {
+//   // beforeinstallprompt Event fired
 
-<p>To try out caching, disconnect from your network then reload this page.</p>
+//   // e.userChoice will return a Promise.
+//   e.userChoice.then(function(choiceResult) {
 
+//     console.log(choiceResult.outcome);
 
-<script src="yongindex.js" ></script>
+//     if(choiceResult.outcome == 'dismissed') {
+//       console.log('User cancelled home screen install');
+//     }
+//     else {
+//       console.log('User added to home screen');
+//     }
+//   });
+// });
+
+// var isTooSoon = true;
+// window.addEventListener("beforeinstallprompt", function(e) {
+//     if (isTooSoon) {
+//         e.preventDefault(); 
+
+//         setTimeout(function() {
+//             isTooSoon = false;
+//             e.prompt(); 
+//         }, 10000);
+//     }
+// });
+
+    </script>
+
+ <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/yongsw.js',{
+                scope : '/'
+            }).then(registration => {
+                console.log('sw reg successful with scope: ', registration.scope);
+            }).catch(error => {
+                console.log('sw reg failed: ', error);
+            });
+        });
+    }
+  </script>
+
+  <!--<script>
+    const videos = {
+      one: document.querySelector('video')
+    };
+
+    const videoRequest = fetch('./object/sample.mp4').then(response => response.blob());
+    videoRequest.then(blob => {
+      const request = indexedDB.open('databaseNameHere', 1);
+
+      request.onsuccess = event => {
+        const db = event.target.result;
+
+        const transaction = db.transaction(['videos']);
+        const objectStore = transaction.objectStore('videos');
+
+        const test = objectStore.get('test');
+
+        test.onerror = event => {
+          console.log('error');
+        };
+
+        test.onsuccess = event => {
+          videos.one.src = window.URL.createObjectURL(test.resulst.blob);
+        };
+      }
+
+      request.onupgradeneeded = event => {
+        const db = event.target.result;
+        const objectStore = db.createObjectStore('videos', { keyPath: 'name' });
+
+        objectStore.transaction.oncomplete = event => {
+          const videoObjectStore = db.transaction('videos', 'readwrite').objectStore('videos');
+          videoObjectStore.add({name: 'test', blob: blob});
+        };
+      }
+    });
+  </script>-->

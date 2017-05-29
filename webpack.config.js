@@ -1,8 +1,7 @@
 module.exports = {
     context: __dirname + '/app',
     entry: {
-        app : './app.js',
-        push: './push.js'
+        index : './index.js'
     },
     module:{
         rules: [
@@ -11,7 +10,10 @@ module.exports = {
                 exclude: [/node_modules/],
                 use: [{
                     loader: 'babel-loader',
-                    options: { presets: ['es2015','react'] },
+                    options: { 
+                        presets: ['es2015','react'],
+                        plugins:[ 'syntax-class-properties', 'transform-class-properties'] 
+                    },
                 }],
             },
             {

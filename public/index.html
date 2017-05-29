@@ -17,12 +17,47 @@
     <div id="info_device_token" style="border:1px solid blue; height:200px;width:100%;word-wrap:break-word">
         here
     </div>
-    <!--<img src="/images/girl.jpg" alt="소녀" />-->
+<!--
+    <div class="dialog-container">
+
+    </div>-->
+
+    <!--<div class="loader">
+    </div>-->
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
     <script>
-        var reg;
-        var sub;
-        var isSubscribed = false;
-        var subscribeButton = document.querySelector('button');
+        // Initialize Firebase
+        // TODO: Replace with your project's customized code snippet
+        var config = {
+            apiKey: "AIzaSyCwMqGdgBul99hfleKddOH1iDcypkj3FF0",
+            authDomain: "am-pwa.firebaseapp.com",
+            databaseURL: "https://am-pwa.firebaseio.com",
+            storageBucket: "am-pwa.appspot.com",
+            messagingSenderId: "183386889304",
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        var swRegistration;
+        const appServerPushPublicKey = 'BE3LGAwv5l43NwS7YJHs5bXfXWnZtDKzvDMb-HP75yxg3vV1UxBciKg-pGVFUNsh5E6ERBiXIaJSpGhWJ8L9WMc';
+
+        function initialisePushSubscribedUI() {
+            // Set the initial subscription value
+            swRegistration.pushManager.getSubscription()
+            .then(function(subscription) {
+                isSubscribed = !(subscription === null);
+
+                if (isSubscribed) {
+                
+                } else {
+                    
+                }
+
+                updateBtn();
+            });
+        }
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function () {
@@ -43,7 +78,7 @@
                         console.log('서비스워커 업데이트 완료.');
                     }, 10000);
 
-                    if (reg.installing) {
+                    if (swRegistration.installing) {
                         console.log('Service worker installing');
                     } else if (reg.waiting) {
                         console.log('Service worker waiting(installed)');
@@ -55,37 +90,10 @@
                 });
             });
         }
-
-        subscribeButton.addEventListener('click', function () {
-            if (isSubscribed) {
-                unsubscribe();
-            } else {
-                subscribe();
-            }
-        });
-        function subscribe() {
-            reg.pushManager.subscribe({ userVisibleOnly: true }).
-                then(function (pushSubscription) {
-                    sub = pushSubscription;
-                    
-                    //alert('Subscribed! Endpoint:' + sub.endpoint);
-                    document.getElementById('info_device_token').innerHTML  = sub.endpoint;
-                    subscribeButton.textContent = 'Unsubscribe';
-                    isSubscribed = true;
-                });
-        }
-        function unsubscribe() {
-            sub.unsubscribe().then(function (event) {
-                subscribeButton.textContent = 'Subscribe';
-                console.log('Unsubscribed!', event);
-                isSubscribed = false;
-            }).catch(function (error) {
-                console.log('Error unsubscribing', error);
-                subscribeButton.textContent = 'Subscribe';
-            });
-        }
     </script>
-    <script src="js/app.bundle.js"></script>
+    
+    <script src="js/index.bundle.js"></script>
+    
 </body>
 
 </html>
