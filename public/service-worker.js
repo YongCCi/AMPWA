@@ -1,4 +1,4 @@
-const PRECACHE_NAME = 'precache-v1';   // 캐시명
+const PRECACHE_NAME = 'precache-v2';   // 캐시명
 const RUNTIME_NAME = 'runtime';
 // 캐시지정 파일목록
 const PRECACHE_URLS = [
