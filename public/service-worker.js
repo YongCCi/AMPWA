@@ -5,7 +5,7 @@ const PRECACHE_URLS = [
     'index.html'
     , './'   // alias for index.html
     , '/css/site.css'
-    , '/js/app.bundle.js'
+    , '/js/index.bundle.js'
 ];
 
 //-----------------------------------------

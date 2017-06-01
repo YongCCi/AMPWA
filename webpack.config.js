@@ -1,3 +1,5 @@
+var webpack = require('webpack');
+
 module.exports = {
     context: __dirname + '/app',
     entry: {
@@ -29,5 +31,13 @@ module.exports = {
     output: {
         path: __dirname + '/public/js',
         filename: '[name].bundle.js'
-    }
+    },
+    plugins: [
+        // 압축처리
+        new webpack.optimize.UglifyJsPlugin({
+            compressor: {
+                warnings: false // 경고문구 나오지 않게
+            }
+        })
+    ]
 };

@@ -10,42 +10,52 @@
 </head>
 
 <body>
-    <header class="header" id="header">
-    </header>
-
-    <nav class="nav" id="nav">
-    </nav>
-
-    <main class="main" id="main">
-
-    </main>
-
-    <div class="dialog-container">
-
+    <div id="root">
+        
     </div>
 
-    <div class="loader">
-    <!-- Show a spinner or placeholders for content -->
-    </div>
+    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        // TODO: Replace with your project's customized code snippet
+        var config = {
+            apiKey: "AIzaSyCwMqGdgBul99hfleKddOH1iDcypkj3FF0",
+            authDomain: "am-pwa.firebaseapp.com",
+            databaseURL: "https://am-pwa.firebaseio.com",
+            storageBucket: "am-pwa.appspot.com",
+            messagingSenderId: "183386889304",
+        };
+        firebase.initializeApp(config);
+    </script>
 
     <script>
-        var reg;
+        var swRegistration;
+        const appServerPushPublicKey = 'BE3LGAwv5l43NwS7YJHs5bXfXWnZtDKzvDMb-HP75yxg3vV1UxBciKg-pGVFUNsh5E6ERBiXIaJSpGhWJ8L9WMc';
+        function initialisePushSubscribedUI() {
+            // Set the initial subscription value
+            swRegistration.pushManager.getSubscription()
+            .then(function(subscription) {
+                isSubscribed = !(subscription === null);
+                if (isSubscribed) {
+                
+                } else {
+                    
+                }
+                updateBtn();
+            });
+        }
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function () {
                 //-----------------------------------------
                 // 서비스워커 등록(registration)
                 //-----------------------------------------
-                //navigator.serviceWorker.register('/service-worker.js?' + Math.round(new Date().getTime() / 1000), {
                 navigator.serviceWorker.register('/service-worker.js', {
                     scope: '/'
                 }).then(function (reg) {
                     console.log('서비스워커 registration 성공. Scope is ', reg.scope);
                     return navigator.serviceWorker.ready;
-                }).then(function (serviceWorkerRegistration) {
-                    reg = serviceWorkerRegistration;
-                    subscribeButton.disabled = false;
-
+                }).then(function (reg) {
                     if (reg.installing) {
                         console.log('Service worker installing');
                     } else if (reg.waiting) {
@@ -60,7 +70,6 @@
             });
         }
     </script>
-    <script src="js/app.bundle.js"></script>
+    <script src="js/index.bundle.js"></script>
 </body>
-
 </html>
