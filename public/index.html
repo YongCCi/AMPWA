@@ -1,31 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>알바몬 PWA 앱</title>
     <link rel="manifest" href="manifest.webmanifest">
-    <link href="/css/site.css" rel="stylesheet" />
+    <meta name="msapplication-TileImage" content="albamon-icon-192x192.png">
+    <meta name="msapplication-TileColor" content="#ff6600">
+    <meta name="theme-color" content="#ff6600">
+    <style>
+        body {
+            padding-top: 0px;
+            padding-bottom: 0px;
+            margin: 0px;
+        }
+        img {
+            border: none;
+        }        
+    </style>
 </head>
 
 <body>
-    <!--<header class="header" id="header">
-    </header>
-
-    <nav class="nav" id="nav">
-    </nav>-->
-
     <div id="root">
-
+        
     </div>
-<!--
-    <div class="dialog-container">
-
-    </div>-->
-
-    <!--<div class="loader">
-    </div>-->
 
     <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
     <script>
@@ -45,19 +44,16 @@
     <script>
         var swRegistration;
         const appServerPushPublicKey = 'BE3LGAwv5l43NwS7YJHs5bXfXWnZtDKzvDMb-HP75yxg3vV1UxBciKg-pGVFUNsh5E6ERBiXIaJSpGhWJ8L9WMc';
-
         function initialisePushSubscribedUI() {
             // Set the initial subscription value
             swRegistration.pushManager.getSubscription()
             .then(function(subscription) {
                 isSubscribed = !(subscription === null);
-
                 if (isSubscribed) {
                 
                 } else {
                     
                 }
-
                 updateBtn();
             });
         }
@@ -67,34 +63,26 @@
                 //-----------------------------------------
                 // 서비스워커 등록(registration)
                 //-----------------------------------------
-                //navigator.serviceWorker.register('/service-worker.js?' + Math.round(new Date().getTime() / 1000), {
-                navigator.serviceWorker.register('/service-worker.js', {
+                navigator.serviceWorker.register('service-worker.js', {
                     scope: '/'
                 }).then(function (reg) {
                     console.log('서비스워커 registration 성공. Scope is ', reg.scope);
                     return navigator.serviceWorker.ready;
-                }).then(function (serviceWorkerRegistration) {
-                    swRegistration = serviceWorkerRegistration;
-                    subscribeButton.disabled = false;
-                    
-
-                    if (swRegistration.installing) {
+                }).then(function (reg) {
+                    if (reg.installing) {
                         console.log('Service worker installing');
-                    } else if (swRegistration.waiting) {
+                    } else if (reg.waiting) {
                         console.log('Service worker installed');
-                    } else if (swRegistration.active) {
+                    } else if (reg.active) {
                         console.log('Service worker active');
                     }
-                    initialisePushSubscribedUI();
+
                 }).catch(function (err) {
                     console.log('서비스워커 registration 실패.', err);
                 });
             });
         }
     </script>
-    
     <script src="js/index.bundle.js"></script>
-    
 </body>
-
 </html>

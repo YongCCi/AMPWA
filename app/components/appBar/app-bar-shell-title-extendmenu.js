@@ -35,6 +35,7 @@ const Logged = (props) => (
 
 Logged.muiName = 'IconMenu';
 
+
 const styles = { 
     title:{
         cursor:'pointer',
@@ -71,14 +72,13 @@ class Header extends Component{
         return(
             <div>
                     <AppBar
-                        title ="PWA"
+                        title ="알바몬"
                         titleStyle={styles.title}
                         onLeftIconButtonTouchTap ={this.handleTochLeftIconTap}
                         onTitleTouchTap={this.handleTouchTap}
                         iconElementRight={this.state.logged ? <Logged /> : <Login />}
-                        />
-                <EnhancedDrawer onRef={ref=>(this.child=ref)}/> 
-            
+                    />
+                    <EnhancedDrawer onRef={ref=>(this.child=ref)}/> 
             </div>
         );
     }
