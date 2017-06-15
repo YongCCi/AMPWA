@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {AppBar} from 'material-ui';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
@@ -61,7 +60,6 @@ class Header extends Component{
 
     handleTouchTap = (event) => {
         event.preventDefault();
-        alert('pwa Test app');
     };
 
     handleTochLeftIconTap = (event) => {
@@ -72,7 +70,6 @@ class Header extends Component{
     render(){
         return(
             <div>
-                <MuiThemeProvider>
                     <AppBar
                         title ="PWA"
                         titleStyle={styles.title}
@@ -80,7 +77,6 @@ class Header extends Component{
                         onTitleTouchTap={this.handleTouchTap}
                         iconElementRight={this.state.logged ? <Logged /> : <Login />}
                         />
-                </MuiThemeProvider>
                 <EnhancedDrawer onRef={ref=>(this.child=ref)}/> 
             
             </div>

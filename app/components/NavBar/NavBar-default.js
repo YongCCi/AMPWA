@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
 import Drawer from 'material-ui/Drawer';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import MenuItem from 'material-ui/MenuItem';
 
 export default class DrawerComponent extends Component {
@@ -24,7 +23,6 @@ export default class DrawerComponent extends Component {
 
     render() {
         return (
-            <MuiThemeProvider>
                 <div>
                     <Drawer
                         docked={false}
@@ -32,13 +30,12 @@ export default class DrawerComponent extends Component {
                         open={this.state.open}
                         onRequestChange={(open) => this.setState({open})}
                     >
-                        <MenuItem onTouchTap={this.handleClose}><Link to="/">홈</Link></MenuItem>
-                        <MenuItem onTouchTap={this.handleClose}><Link to="recruit">채용공고</Link></MenuItem>
-                        <MenuItem onTouchTap={this.handleClose}><Link to="push-setting">알림설정</Link></MenuItem>
+                        <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="/"/>}>홈</MenuItem>
+                        <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="recruit"/>}>채용공고</MenuItem>
+                        <MenuItem onTouchTap={this.handleClose} containerElement={<Link to="push-setting"/>}>알림설정</MenuItem>
                     </Drawer>
                     {this.props.children}
                 </div>
-            </MuiThemeProvider>
         );
     }
 }

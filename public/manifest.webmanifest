@@ -1,6 +1,6 @@
 {
     "name": "Albamon Web App Demo",
-    "short_name": "Albamon PWA",
+    "short_name": "Albamon",
     "icons": [
         {
             "src": "albamon-icon-96x96.png",

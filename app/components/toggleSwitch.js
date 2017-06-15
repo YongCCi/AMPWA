@@ -1,5 +1,4 @@
 import React from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Toggle from 'material-ui/Toggle';
 
 const styles = {
@@ -27,7 +26,6 @@ const styles = {
 };
 
 const ToggleSwitch = () => (
-    <MuiThemeProvider>
     <div style={styles.block}>
         <Toggle
             label="Push On/Off"
@@ -36,9 +34,9 @@ const ToggleSwitch = () => (
             thumbSwitchedStyle={styles.thumbSwitched}
             trackSwitchedStyle={styles.trackSwitched}
             labelStyle={styles.labelStyle}
+            //onToggle = {}
         />
     </div>
-    </MuiThemeProvider>
 );
 
 export default ToggleSwitch;

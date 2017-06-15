@@ -4,6 +4,7 @@ import App from './app.js'
 import Home from './containers/home.js';
 import Product from './containers/product.js';
 import PushSetting from './containers/push-setting.js';
+
 import { BrowserRouter as Router, Route, browserHistory, Switch } from 'react-router-dom';
 
 ReactDOM.render(
