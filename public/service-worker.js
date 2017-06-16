@@ -109,19 +109,19 @@ self.addEventListener('push', function(event) {
         return;
     }
     var title = 'Push message'; 
-    var message = 'Message'; 
+    var body = 'Message'; 
 
     var data = {};
-    if (event.notification) {
-        data = event.notification.json();
+    if (event.data) {
+        data = event.data.json();
 
         title = data.title;
-        message = data.message;
+        body = data.message;
     }
     
     event.waitUntil(
         self.registration.showNotification(title, {
-            body: message,
+            body: body,
             icon: 'images/icon.png',
             tag: 'my-tag'
     }));  
