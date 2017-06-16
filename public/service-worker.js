@@ -102,42 +102,91 @@ this.addEventListener('fetch', function(event) {
 //-----------------------------------------
 // 서비스워커 푸시발생(push)
 //-----------------------------------------
+
 self.addEventListener('push', function(event) {
-  console.log('Push message', event);
-  var title = 'Push message'; 
-  var body = 'Message'; 
-  if(event.data){
-    title = event.data.title;
-    body =event.data.message;
-  }
-  
-  event.waitUntil(
-    self.registration.showNotification(title, {
-      body: body,
-      icon: 'images/icon.png',
-      tag: 'my-tag'
-    }));
+    console.log('Push message', event);
+    if (!(self.Notification && self.Notification.permission === 'granted')) {
+        return;
+    }
+    var title = 'Push message'; 
+    var message = 'Message'; 
+
+    var data = {};
+    if (event.notification) {
+        data = event.notification.json();
+
+        title = data.title;
+        message = data.message;
+    }
+    
+    event.waitUntil(
+        self.registration.showNotification(title, {
+            body: message,
+            icon: 'images/icon.png',
+            tag: 'my-tag'
+    }));  
 });
 
 self.addEventListener('notificationclick', function(event) {
-    console.log('Notification click: tag ', event.notification.tag);
-    event.notification.close();
-    var url = 'https://am-pwa.firebaseapp.com/';
-    //var url = 'http://localhost:8080';
-    event.waitUntil(
-        clients.matchAll({
-            type: 'window'
-        })
-        .then(function(windowClients) {
-            for (var i = 0; i < windowClients.length; i++) {
-                var client = windowClients[i];
-                if (client.url === url && 'focus' in client) {
-                    return client.focus();
-                }
-            }
-            if (clients.openWindow) {
-                return clients.openWindow(url);
-            }
-        })
-    );
+  console.log('On notification click: ', event.notification.tag);
+  event.notification.close();
+
+  // This looks to see if the current is already open and
+  // focuses if it is
+  event.waitUntil(clients.matchAll({
+    type: 'window'
+  }).then(function(clientList) {
+    for (var i = 0; i < clientList.length; i++) {
+      var client = clientList[i];
+      if (client.url == '/' && 'focus' in client)
+        return client.focus();
+    }
+    if (clients.openWindow)
+      return clients.openWindow('/');
+  }));
 });
+
+// self.addEventListener('notificationclose', event => {  
+// 	// Do something with the event  
+// });
+
+// self.addEventListener('push', function(event) {
+
+//   console.log('Push message', event);
+//   var title = 'Push message'; 
+//   var body = 'Message'; 
+//   if(event.data){
+//     title = event.data.title;
+//     body =event.data.message;
+//   }
+  
+//   event.waitUntil(
+//     self.registration.showNotification(title, {
+//       body: body,
+//       icon: 'images/icon.png',
+//       tag: 'my-tag'
+//     }));
+// });
+
+// self.addEventListener('notificationclick', function(event) {
+//     console.log('Notification click: tag ', event.notification.tag);
+//     event.notification.close();
+//     var url = 'https://am-pwa.firebaseapp.com/';
+//     //var url = 'http://localhost:8080';
+//     event.waitUntil(
+//         clients.matchAll({
+//             type: 'window'
+//         })
+//         .then(function(windowClients) {
+//             for (var i = 0; i < windowClients.length; i++) {
+//                 var client = windowClients[i];
+//                 if (client.url === url && 'focus' in client) {
+//                     return client.focus();
+//                 }
+//             }
+//             if (clients.openWindow) {
+//                 return clients.openWindow(url);
+//             }
+//         })
+//     );
+// });

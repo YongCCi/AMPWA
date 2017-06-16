@@ -20,7 +20,7 @@
     "background_color": "#F5F5F5",
     "display": "standalone",
     "orientataion": "portrait",
-    "start_url": "/index.html?home=true",
+    "start_url": "/?home=true",
     "gcm_sender_id": "183386889304",
     "permissions" :[
         "gcm"

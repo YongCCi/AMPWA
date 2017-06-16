@@ -47,10 +47,23 @@
     <script>
         var swRegistration;
         var subscription;
-        const appServerPushPublicKey = 'BE3LGAwv5l43NwS7YJHs5bXfXWnZtDKzvDMb-HP75yxg3vV1UxBciKg-pGVFUNsh5E6ERBiXIaJSpGhWJ8L9WMc';
+        const appServerPushPublicKey = 'BN-ZS9_FCPkMk74GlE0veUn_m6vauSA4i7kwUEP2RJpBTc8ofLsnaIUAMYXquO7688ZVd-Qr1TENCmGrFvPWa5M';
+        function urlB64ToUint8Array(base64String) {
+            const padding = '='.repeat((4 - base64String.length % 4) % 4);
+            const base64 = (base64String + padding)
+                .replace(/\-/g, '+')
+                .replace(/_/g, '/');
+
+            const rawData = window.atob(base64);
+            const outputArray = new Uint8Array(rawData.length);
+            for (let i = 0; i < rawData.length; ++i) {
+                outputArray[i] = rawData.charCodeAt(i);
+            }
+            return outputArray;
+        }
 
         function getUniqueIDFromSubscriptionEndpoint(endpoint){
-            return endpoint.split('gcm/send/')[1];
+            return endpoint.split('fcm/send/')[1];
         }
 
         function setSubscriptionEndpointData(endpoint) {
@@ -86,9 +99,12 @@
                     }else{
                         swRegistration.pushManager.subscribe({
                             userVisibleOnly: true // 브라우저에게 메시지를 받으면 알림이 항상 보여지게 함. 현재 이를 가리는것은 불법.
+                            ,applicationServerKey:urlB64ToUint8Array(appServerPushPublicKey)
                         }).then(function (sub) {
                             subscription = sub;
-                            console.log('endpoint:', subscription.endpoint);
+                            console.log('endpoint:', subscription);
+                            console.log('endpoint:', subscription.getKey('p256dh'));
+
                             setSubscriptionEndpointData(subscription.endpoint);
                         }).catch(function (err) {
                             console.error('Failed Subscription.', err);
