@@ -19,13 +19,6 @@
             border: none;
         }        
     </style>
-</head>
-
-<body>
-    <div id="root">
-        
-    </div>
-
     <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
     <script>
         // Initialize Firebase
@@ -39,22 +32,78 @@
         };
         firebase.initializeApp(config);
         var database = firebase.database();
+        //var messaging = firebase.messaging();
+
     </script>
+    
+</head>
+
+<body>
+    <div id="root">
+        
+    </div>
+
 
     <script>
         var swRegistration;
+        var subscription;
         const appServerPushPublicKey = 'BE3LGAwv5l43NwS7YJHs5bXfXWnZtDKzvDMb-HP75yxg3vV1UxBciKg-pGVFUNsh5E6ERBiXIaJSpGhWJ8L9WMc';
-        function initialisePushSubscribedUI() {
-            // Set the initial subscription value
-            swRegistration.pushManager.getSubscription()
-            .then(function(subscription) {
-                isSubscribed = !(subscription === null);
-                if (isSubscribed) {
-                
-                } else {
-                    
-                }
-                updateBtn();
+
+        function getUniqueIDFromSubscriptionEndpoint(endpoint){
+            return endpoint.split('gcm/send/')[1];
+        }
+
+        function setSubscriptionEndpointData(endpoint) {
+            // messaging.requestPermission().then(function(){
+            //     console.info('%cSubscribed!', 'background: #222; color: #bada55');
+            // });
+            var uniqueID = getUniqueIDFromSubscriptionEndpoint(endpoint);
+            firebase.database().ref('/subscription').push({uniqueID:uniqueID}).then(function(){
+                console.info('%cSubscribed!', 'background: #222; color: #bada55');
+            });
+
+        }
+
+        function removeSubscriptionEndpointData(endpoint) {
+            var uniqueID = getUniqueIDFromSubscriptionEndpoint(endpoint);
+            var ref = firebase.database().ref('/subscription');
+            ref.orderByChild('uniqueID').equalTo(uniqueID).once("value", function(snapshot){
+                var updates = {};
+                snapshot.forEach(function(child){
+                    updates[child.key] = null;
+                });
+                ref.update(updates);
+            });
+        }
+
+        function subscribe() {
+            swRegistration.pushManager.getSubscription().
+                then(function (sub) {
+                    subscription = sub;
+                    isSubscribed = !(subscription === null);
+                    if(isSubscribed){
+                        console.info('%cAlready Subscribed', 'background: #222; color: #bada55');
+                    }else{
+                        swRegistration.pushManager.subscribe({
+                            userVisibleOnly: true // 브라우저에게 메시지를 받으면 알림이 항상 보여지게 함. 현재 이를 가리는것은 불법.
+                        }).then(function (sub) {
+                            subscription = sub;
+                            console.log('endpoint:', subscription.endpoint);
+                            setSubscriptionEndpointData(subscription.endpoint);
+                        }).catch(function (err) {
+                            console.error('Failed Subscription.', err);
+                        }); 
+                    }
+                });
+        }
+        
+        function unsubscribe() {
+            subscription.unsubscribe().then(function (event) {
+                console.log('Unsubscribed!', event);
+                isSubscribed = false;
+                removeSubscriptionEndpointData(subscription.endpoint)
+            }).catch(function (error) {
+                console.error('Error unsubscribing', 'background: #222; color: #bada55', error);
             });
         }
 
@@ -67,6 +116,7 @@
                     scope: '/'
                 }).then(function (reg) {
                     console.log('서비스워커 registration 성공. Scope is ', reg.scope);
+                    swRegistration= reg;
                     return navigator.serviceWorker.ready;
                 }).then(function (reg) {
                     if (reg.installing) {
@@ -76,7 +126,10 @@
                     } else if (reg.active) {
                         console.log('Service worker active');
                     }
-
+                    return navigator.serviceWorker.ready;
+                }).then(function(reg){
+                    swRegistration.pushManager.subscribe({ userVisibleOnly: true });
+                    subscribe();
                 }).catch(function (err) {
                     console.log('서비스워커 registration 실패.', err);
                 });

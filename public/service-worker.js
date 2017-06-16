@@ -104,10 +104,16 @@ this.addEventListener('fetch', function(event) {
 //-----------------------------------------
 self.addEventListener('push', function(event) {
   console.log('Push message', event);
-  var title = 'Push message';
+  var title = 'Push message'; 
+  var body = 'Message'; 
+  if(event.data){
+    title = event.data.title;
+    body =event.data.message;
+  }
+  
   event.waitUntil(
     self.registration.showNotification(title, {
-      body: 'The Message',
+      body: body,
       icon: 'images/icon.png',
       tag: 'my-tag'
     }));
@@ -117,6 +123,7 @@ self.addEventListener('notificationclick', function(event) {
     console.log('Notification click: tag ', event.notification.tag);
     event.notification.close();
     var url = 'https://am-pwa.firebaseapp.com/';
+    //var url = 'http://localhost:8080';
     event.waitUntil(
         clients.matchAll({
             type: 'window'
