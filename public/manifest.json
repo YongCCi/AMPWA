@@ -1,5 +1,5 @@
 {
-    "name": "yong demo",
+    "name": "Albamon Web App Demo",
     "short_name": "Albamon PWA",
     "icons": [
         {
@@ -20,6 +20,9 @@
     "background_color": "#F5F5F5",
     "display": "standalone",
     "orientataion": "portrait",
-    "start_url": "/index.html?home=true",
-    "gcm_sender_id": "412774017832"
+    "start_url": "/?home=true",
+    "gcm_sender_id": "183386889304",
+    "permissions" :[
+        "gcm"
+    ]
 }

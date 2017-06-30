@@ -47,12 +47,12 @@ this.addEventListener('activate', function (event) {
                     return !currentCaches.includes(cacheName);
                 }).map(function (cacheName) {
                     // 캐쉬 제거 처리 
-                    console.log(cacheName + " 기존 캐시 삭제");
+                    console.log(cacheName + ' 기존 캐시 삭제');
                     return caches.delete(cacheName);
                 })
             )
         }).then(function () {
-            console.log("---[캐시 정리 작업]--- End");
+            console.log('---[캐시 정리 작업]--- End');
             return self.clients.claim();
         })
     )
@@ -70,7 +70,7 @@ this.addEventListener('fetch', function (event) {
             }
             return fetch(event.request);    // from Network
         }).catch(function (err) {
-            console.log("fetch 오류!" + err);
+            console.log('fetch 오류!' + err);
             return false;
         })
     );
