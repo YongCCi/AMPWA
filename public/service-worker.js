@@ -8,6 +8,7 @@ const PRECACHE_URLS = [
     , '/js/index.bundle.js'
     , 'albamon-icon-96x96.png'
     , 'albamon-icon-192x192.png'
+    , '/images/*'
 ];
 
 //-----------------------------------------
