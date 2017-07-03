@@ -32,7 +32,7 @@
         };
         firebase.initializeApp(config);
         var database = firebase.database();
-        var messaging = firebase.messaging();
+        //var messaging = firebase.messaging();
 
     </script>
     
@@ -66,13 +66,13 @@
         }
 
         function setSubscriptionEndpointData(endpoint) {
-            messaging.requestPermission().then(function(){
-                console.info('%cSubscribed!', 'background: #222; color: #bada55');
+            //messaging.requestPermission().then(function(){
+                //console.info('%cSubscribed!', 'background: #222; color: #bada55');
                 var uniqueID = getUniqueIDFromSubscriptionEndpoint(endpoint);
                 firebase.database().ref('/subscription').push({uniqueID:uniqueID}).then(function(){
                     console.info('%cSubscribed!', 'background: #222; color: #bada55');
                 });                
-            });
+           // });
         }
 
         function removeSubscriptionEndpointData(endpoint) {

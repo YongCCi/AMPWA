@@ -4,7 +4,7 @@ const RUNTIME_NAME = 'runtime';
 const PRECACHE_URLS = [
     'index.html'
     , './'   // alias for index.html
-    , '/css/site.css'
+    // , '/css/site.css'
     , '/js/index.bundle.js'
     , 'albamon-icon-96x96.png'
     , 'albamon-icon-192x192.png'
@@ -118,13 +118,13 @@ self.addEventListener('push', function(event) {
     var title = 'Push message'; 
     var body = 'Message'; 
 
-    var data = {};
-    if (event.data) {
-        data = event.data.json();
+    // var data = {};
+    // if (event.data) {
+    //     data = event.data.json();
 
-        title = data.title;
-        body = data.message;
-    }
+    //     title = data.title;
+    //     body = data.message;
+    // }
     
     event.waitUntil(
         self.registration.showNotification(title, {
