@@ -127,24 +127,49 @@ self.addEventListener('push', function(event) {
     }));  
 });
 
+//-----------------------------------------
+// 서비스워커 푸시노티피케이션(인디케이터) 클릭이벤트 리스터
+//-----------------------------------------
 self.addEventListener('notificationclick', function(event) {
-  console.log('On notification click: ', event.notification.tag);
-  event.notification.close();
-
-  // This looks to see if the current is already open and
-  // focuses if it is
-  event.waitUntil(clients.matchAll({
-    type: 'window'
-  }).then(function(clientList) {
-    for (var i = 0; i < clientList.length; i++) {
-      var client = clientList[i];
-      if (client.url == '/' && 'focus' in client)
-        return client.focus();
-    }
-    if (clients.openWindow)
-      return clients.openWindow('/');
-  }));
+    //console.log('Notification click: tag ', event.notification.tag);
+    event.notification.close();
+    var url = 'https://am-pwa.firebaseapp.com/';
+    //var url = 'http://localhost:8080';
+    event.waitUntil(
+        clients.matchAll({
+            type: 'window'
+        })
+        .then(function(windowClients) {
+            for (var i = 0; i < windowClients.length; i++) {
+                var client = windowClients[i];
+                if (client.url === url && 'focus' in client) {
+                    return client.focus();
+                }
+            }
+            if (clients.openWindow) {
+                return clients.openWindow(url);
+            }
+        })
+    );
 });
+// self.addEventListener('notificationclick', function(event) {
+//   console.log('On notification click: ', event.notification.tag);
+//   event.notification.close();
+
+//   // This looks to see if the current is already open and
+//   // focuses if it is
+//   event.waitUntil(clients.matchAll({
+//     type: 'window'
+//   }).then(function(clientList) {
+//     for (var i = 0; i < clientList.length; i++) {
+//       var client = clientList[i];
+//       if (client.url == '/' && 'focus' in client)
+//         return client.focus();
+//     }
+//     if (clients.openWindow)
+//       return clients.openWindow('/');
+//   }));
+// });
 
 // self.addEventListener('notificationclose', event => {  
 // 	// Do something with the event  
@@ -168,25 +193,3 @@ self.addEventListener('notificationclick', function(event) {
 //     }));
 // });
 
-// self.addEventListener('notificationclick', function(event) {
-//     console.log('Notification click: tag ', event.notification.tag);
-//     event.notification.close();
-//     var url = 'https://am-pwa.firebaseapp.com/';
-//     //var url = 'http://localhost:8080';
-//     event.waitUntil(
-//         clients.matchAll({
-//             type: 'window'
-//         })
-//         .then(function(windowClients) {
-//             for (var i = 0; i < windowClients.length; i++) {
-//                 var client = windowClients[i];
-//                 if (client.url === url && 'focus' in client) {
-//                     return client.focus();
-//                 }
-//             }
-//             if (clients.openWindow) {
-//                 return clients.openWindow(url);
-//             }
-//         })
-//     );
-// });

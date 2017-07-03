@@ -102,8 +102,7 @@
                         }).then(function (sub) {
                             subscription = sub;
                             console.log('endpoint:', subscription);
-                            console.log('endpoint:', subscription.getKey('p256dh'));
-
+                            //console.log('endpoint:', subscription.getKey('p256dh'));
                             setSubscriptionEndpointData(subscription.endpoint);
                         }).catch(function (err) {
                             console.error('Failed Subscription.', err);
@@ -143,15 +142,15 @@
                     }
                     return navigator.serviceWorker.ready;
                 }).then(function(reg){
-                    //swRegistration.pushManager.subscribe({ userVisibleOnly: true });
-                    //subscribe();
-                     messaging.requestPermission().then(function(){
-                            console.info('%cSubscribed!', 'background: #222; color: #bada55');
-                            // var uniqueID = getUniqueIDFromSubscriptionEndpoint(endpoint);
-                            // firebase.database().ref('/subscription').push({uniqueID:uniqueID}).then(function(){
-                            //     console.info('%cSubscribed!', 'background: #222; color: #bada55');
-                            // });                
-                        });                    
+                    swRegistration.pushManager.subscribe({ userVisibleOnly: true });
+                    subscribe();
+                    //  messaging.requestPermission().then(function(){
+                    //         console.info('%cSubscribed!', 'background: #222; color: #bada55');
+                    //         // var uniqueID = getUniqueIDFromSubscriptionEndpoint(endpoint);
+                    //         // firebase.database().ref('/subscription').push({uniqueID:uniqueID}).then(function(){
+                    //         //     console.info('%cSubscribed!', 'background: #222; color: #bada55');
+                    //         // });                
+                    //     });                    
                 }).catch(function (err) {
                     console.log('서비스워커 registration 실패.', err);
                 });
