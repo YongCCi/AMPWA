@@ -11,9 +11,10 @@ const PRECACHE_URLS = [
     , 'images/pwa-reliable.png'
     , 'images/pwa-fast.png'
     , 'images/pwa-engaging.png'
-    , 'images/sample_1.png'
-    , 'images/sample_2.png'
-    , 'images/sample_3.png'
+    , 'images/sample_1.jpg'
+    , 'images/sample_2.jpg'
+    , 'images/sample_3.jpg'
+    , 'images/heri.jpg'
 ];
 
 //-----------------------------------------

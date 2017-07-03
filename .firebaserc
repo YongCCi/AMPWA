@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "am-pwa"
+    "default": "am-pwa",
+    "am-pwa": "am-pwa"
   }
 }
