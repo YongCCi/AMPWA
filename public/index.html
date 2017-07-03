@@ -142,7 +142,7 @@
                     }
                     return navigator.serviceWorker.ready;
                 }).then(function(reg){
-                    swRegistration.pushManager.subscribe({ userVisibleOnly: true });
+                    //swRegistration.pushManager.subscribe({ userVisibleOnly: true });
                     subscribe();
                     //  messaging.requestPermission().then(function(){
                     //         console.info('%cSubscribed!', 'background: #222; color: #bada55');
@@ -157,10 +157,10 @@
             });
         }
 
-        messaging.onMessage(function(payload) {
-            console.log("Message received. ", payload);
-        // ...
-        });
+        // messaging.onMessage(function(payload) {
+        //     console.log("Message received. ", payload);
+        // // ...
+        // });
     </script>
     <script src="js/index.bundle.js"></script>
 </body>
