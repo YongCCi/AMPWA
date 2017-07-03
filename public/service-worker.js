@@ -133,7 +133,7 @@ self.addEventListener('push', function(event) {
 self.addEventListener('notificationclick', function(event) {
     //console.log('Notification click: tag ', event.notification.tag);
     event.notification.close();
-    var url = 'https://am-pwa.firebaseapp.com/';
+    var url = 'https://am-pwa.firebaseapp.com/?home=true';
     //var url = 'http://localhost:8080';
     event.waitUntil(
         clients.matchAll({
